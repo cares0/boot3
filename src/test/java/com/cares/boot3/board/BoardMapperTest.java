@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cares.boot3.util.Pager;
+
 @SpringBootTest
-@Transactional
+//@Transactional
 class BoardMapperTest {
 
 	@Autowired
@@ -27,26 +29,34 @@ class BoardMapperTest {
 	
 	@Test
 	void getListTest() throws Exception {
+		Pager pager = new Pager();
+		pager.makeRow();
+		List<BoardVO> boardVOs = boardMapper.getList(pager);
 		
-		List<BoardVO> boardVOs = boardMapper.getList();
-		
-		assertNotEquals(0, boardVOs.size());
+		System.out.println(boardVOs);
+		assertEquals(10, boardVOs.size());
 	}
 	
-	@Test
+	//@Test
 	void setAddTest() throws Exception {
-		BoardVO boardVO = new BoardVO();
-		boardVO.setTitle("title");
-		boardVO.setWriter("writer");
-		boardVO.setContents("contents");
-		
-		int result = boardMapper.setUpdate(boardVO);
-		
-		assertEquals(1, result);
+		for(int i=0;i<100;i++) {
+			
+			if(i%10 == 0) {
+				Thread.sleep(1000);
+			}
+			BoardVO boardVO = new BoardVO();
+			boardVO.setTitle("title" + i);
+			boardVO.setWriter("writer" + i);
+			boardVO.setContents("contents" + i);
+			
+			int result = boardMapper.setAdd(boardVO);
+		}
+		System.out.println("finish");
+		//assertEquals(1, result);
 		
 	}
 
-	@Test
+	//@Test
 	void setDeleteTest() throws Exception {
 		BoardVO boardVO = new BoardVO();
 		boardVO.setNum(3L);
@@ -55,4 +65,17 @@ class BoardMapperTest {
 		
 		assertEquals(1, result);
 	}
+	
+	//@Test
+	void setFileAddTest() throws Exception {
+		BoardFilesVO boardFilesVO = new BoardFilesVO();
+		boardFilesVO.setFileName("fileName");
+		boardFilesVO.setOriName("oriName");
+		boardFilesVO.setNum(3L);
+		
+		int result = boardMapper.setFileAdd(boardFilesVO);
+		
+		assertEquals(1, result);
+	}
+	
 }
