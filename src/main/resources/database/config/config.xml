@@ -6,7 +6,9 @@
   <configuration>
   	<typeAliases>
   		<typeAlias type="com.cares.boot3.util.Pager" alias="Pager"/>	
-  		
+  		<typeAlias type="com.cares.boot3.member.MemberVO" alias="MemberVO"/>
+		<typeAlias type="com.cares.boot3.member.MemberFilesVO" alias="MemberFilesVO"/>
+		
   		<typeAlias type="com.cares.boot3.board.BoardVO" alias="BoardVO"/>
   		<typeAlias type="com.cares.boot3.board.BoardFilesVO" alias="BoardFilesVO"/>
   	

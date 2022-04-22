@@ -96,5 +96,9 @@
  	<delete id="setDelete" parameterType="BoardVO">
  		DELETE FROM BOARD WHERE NUM=#{num}
  	</delete>
+ 	
+ 	<select id="getFileDetail" parameterType="BoardFilesVO" resultType="BoardFilesVO">
+ 		SELECT * FROM BOARDFILES WHERE FILENUM = #{fileNum}
+ 	</select>
 	
 </mapper>
