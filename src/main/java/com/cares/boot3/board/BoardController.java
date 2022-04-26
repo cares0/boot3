@@ -78,4 +78,5 @@ public class BoardController {
 		mv.addObject("vo", boardVO);
 		return mv;
 	}
+	
 }

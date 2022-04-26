@@ -44,13 +44,18 @@
   	</div>
 
 <div class="container">
-	<button id="btn">Click</button>
-	<button id="btn2">Click2</button>
+	<input type="text" id="v1">
+	<input type="checkbox" class="num" name="num" value="a">
+	<input type="checkbox" class="num" name="num" value="b">
+	<input type="checkbox" class="num" name="num" value="c">
+	<input type="checkbox" class="num" name="num" value="d">
+
+	<button id="btn1">get</button>
+	<button id="btn3">Ajax</button>
+	
+	
 </div>
 
-<div>
-	<button id="btn3">ADD</button>
-</div>
 
 <div id="result">
 
@@ -62,7 +67,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script type="text/javascript">
-	$("#btn").on("click", function(){
+/* 	$("#btn").on("click", function(){
 		alert("jquery");
 	});
 	
@@ -74,6 +79,39 @@
 		$('#result').append(
 			'<input type="checkbox">RESULT'
 		)
+	}) */
+	
+	$('#btn1').on("click", function(){
+		let v = $("#v1").val();
+		
+		$.get("./getTest?value="+v, function(data){
+			console.log(data.trim());
+		})
+	})
+	
+	$('#btn3').on("click", function(){
+		let v = $("#v1").val();
+		let nums = [];
+		
+		$(".num").each(function(idx, item){
+			if($(item).prop("checked") == true) {
+				console.log($(item).val());
+				nums.push($(item).val());
+			}
+		});
+		
+		$.ajax({
+			type : "POST",
+			url : "./arrayTest",
+			traditional : true, // 배열을 전송할 경우
+			data : {
+				value : v,
+				numbers : nums
+			},
+			success : function(result){
+				console.log(result.trim());
+			}
+		})
 	})
 
 	
